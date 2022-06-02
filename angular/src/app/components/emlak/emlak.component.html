@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>İlanlar</h1>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Arayın..." (keyup)="Filtrele($event)">
+  </mat-form-field>
+  <button mat-fab color="primary" matTooltip="İlan Ekle" (click)="Ekle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="emlakAdi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> İlan
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.emlakAdi}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="emlakFiyat">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> İlan Fiyatı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.emlakFiyat}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="emlakAciklama">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> İlan Detayı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.emlakAciklama}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+        <button mat-icon-button color="primary" matTooltip="Düzenle" (click)="Duzenle(kayit)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" matTooltip="Sil"  (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+  
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator 
+  [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>
